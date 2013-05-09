@@ -1,27 +1,26 @@
 package bootstrap.liftweb
 
-import net.liftweb._
-import util._
-import Helpers._
-import common._
-import http._
-import sitemap._
-import Loc._
+import code.model.Item
+import code.model.MyDBVendor
 import net.liftmodules._
-import net.liftweb.http.js.jquery._
+import net.liftweb._
+import net.liftweb.common._
 import net.liftweb.db.DB
 import net.liftweb.db.DefaultConnectionIdentifier
-import code.model.MyDBVendor
-import net.liftweb.mapper.Schemifier
-import code.model.TaobaoItem
-import code.model.ItemCategory
+import net.liftweb.http._
 import net.liftweb.http.provider.HTTPRequest
+import net.liftweb.mapper.Schemifier
+import net.liftweb.sitemap._
+import net.liftweb.sitemap.Loc._
+import net.liftweb.util._
+import net.liftweb.util.Helpers._
+import code.model.ItemType
 
 class Boot {
   def boot {
     LiftRules.addToPackages("code")
     DB.defineConnectionManager(DefaultConnectionIdentifier, MyDBVendor)
-    Schemifier.schemify(true, Schemifier.infoF _, TaobaoItem, ItemCategory)
+    Schemifier.schemify(true, Schemifier.infoF _, Item)
 
     FoBo.InitParam.JQuery = FoBo.JQuery182
     FoBo.InitParam.ToolKit = FoBo.Bootstrap230
@@ -32,31 +31,28 @@ class Boot {
     LiftRules.ajaxEnd = Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
     LiftRules.early.append(_.setCharacterEncoding("utf-8"))
     LiftRules.htmlProperties.default.set((r: Req) => new StarXHtmlInHtml5OutProperties(r.userAgent))
-    /*LiftRules.htmlProperties.default.set((r: Req) => {
-      val v = new Html5Properties(r.userAgent)
-      val d = v.setContentType(()=> Full("text/html; charset=utf-8"))
-      d.setEncoding(() => Full("utf-8"))
-      println(d.contentType)
-      d
+
+    LiftRules.setSiteMapFunc(() => MenuInfo.sitemap)
+
+    /*LiftRules.statelessRewrite.prepend(NamedPF("YyRewrite") {
+      case RewriteRequest(
+        ParsePath("index" :: itemType :: Nil, _, _, _), _, _) =>
+        RewriteResponse(
+          "index" :: Nil, Map("itemType" -> itemType)
+          )
     })*/
-
-    val entries = List(
-      Menu.i("Home") / "index", // the simple way to declare a menu
-
-      // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"),
-        "Static Content")))
-
-    LiftRules.setSiteMap(SiteMap(entries: _*))
-
-    //TaobaoItem.loadItem2Cache
-    //Rewrite
-    /*LiftRules.statelessRewrite.append {
-      case RewriteRequest(ParsePath("index" :: offset :: cid :: Nil, _, _, _), _, _) =>
-        RewriteResponse("index" :: Nil, Map("offset" -> offset, "cid" -> cid))
-      case RewriteRequest(ParsePath("index" :: Nil, _, _, _), _, _) =>
-        RewriteResponse("index" :: Nil)
-    }*/
-
   }
+}
+
+object MenuInfo {
+  import Loc._
+  import scala.xml._
+
+  val menus = List(
+    Menu("首页") / "index" >> LocGroup("main"),
+    Menu("美女") / "meinv" / ** >> LocGroup("main"),
+    Menu("帅哥") / "shuaige" / ** >> LocGroup("main"),
+    Menu("萝莉") / "luoli" / ** >> LocGroup("main"))
+
+  def sitemap() = SiteMap(menus: _*)
 }

@@ -2,12 +2,12 @@ package code.snippet
 
 import scala.xml.NodeSeq
 import scala.xml.Text
-
 import net.liftweb.http.PaginatorSnippet
 import net.liftweb.http.S._
 import net.liftweb.util.Helpers._
+import net.liftweb.http.S
 
-trait MyPaginatorSnippet[T] extends PaginatorSnippet[T] {
+trait MyPaginatorSnippet[T] extends BaseSnippet with PaginatorSnippet[T] {
   /*override def prevXml: NodeSeq = if (curPage == 0) { <span class="current  prev">上一页</span> } else { Text("上一页") }
   override def nextXml: NodeSeq = if (curPage == 0) { Text("下一页") } else { <span class="next">下一页</span> }
   override def firstXml: NodeSeq = Text("第一页")

@@ -10,10 +10,22 @@ package bootstrap.liftweb
 import java.io.InputStream
 import java.io.Writer
 
-import scala.xml._
+import scala.xml.MetaData
+import scala.xml.Node
+import scala.xml.NodeSeq
+import scala.xml.NodeSeq.seqToNodeSeq
+import scala.xml.Null
+import scala.xml.PrefixedAttribute
+import scala.xml.UnprefixedAttribute
 
-import net.liftweb.common.{ Box, Empty, Full }
-import net.liftweb.http._
+import net.liftweb.common.Box
+import net.liftweb.common.Empty
+import net.liftweb.common.Full
+import net.liftweb.http.HtmlProperties
+import net.liftweb.http.LiftRules
+import net.liftweb.http.LiftRulesMocker.toLiftRules
+import net.liftweb.http.Req
+import net.liftweb.http.S
 import net.liftweb.util.Html5Writer
 import net.liftweb.util.PCDataXmlParser
 
