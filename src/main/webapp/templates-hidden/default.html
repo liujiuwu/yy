@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>养眼</title>
+<meta name="author" content="52bigo.com"> 
+<meta name="keywords" content="美女,帅哥,萝莉,美女点评,帅哥点评"/>
+<meta name="description" content="每天分享10位美女、帅哥让你每天都愉快！"/>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="/classpath/fobo/bootstrap.css"/>
+<link rel="stylesheet" href="/classpath/fobo/font-awesome.css"/>
+<link rel="stylesheet" href="/css/baby.css"/>
+<link rel="shortcut icon" href="img/favicon.ico"/>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+	<div class="container">
+	  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="brand" href="#">养眼</a>
+	  <div class="nav-collapse collapse">
+		<ul class="nav">
+		  <li class="active"><a href="#">首页</a></li>		  
+		  <li><a href="#about">美女</a></li>
+		  <li><a href="#about">帅哥</a></li>
+		  <li><a href="#about">萝莉</a></li>
+	      <li><a href="#about">专辑</a></li>
+		  <li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">排行榜 <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#">美女</a></li>
+				<li><a href="#">帅哥</a></li>
+				<li><a href="#">萝莉</a></li>
+			  </ul>
+		  </li>
+	   </ul>
+	  </div><!--/.nav-collapse -->
+	</div>
+  </div>
+</div><!-- /.navbar -->
+
+
+<div id="content">The main content will get bound here</div>
+<div id="footer" class="container">
+	<hr />
+	<div class="copyright">
+		CopyRight©爱比购(52bigo.com) 客服邮箱:923933533@qq.com
+	</div>
+</div>
+
+<script type="text/javascript" src="/classpath/fobo/jquery.js"></script>
+<script type="text/javascript" src="/classpath/fobo/bootstrap.js"></script>
+<script type="text/javascript" src="/classpath/json.js"></script>
+<script type="text/javascript" src="js/jquery.masonry.js"></script>
+<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="js/baby.js" ></script>
+<script type="text/javascript">
+	$(function() {
+		$('.item').mouseover(function() {
+			$(this).css('box-shadow', '0 1px 5px rgba(35,25,25,0.5)');
+			$('.btns', this).show();
+		}).mouseout(function() {
+			$(this).css('box-shadow', '0 1px 3px rgba(34,25,25,0.2)');
+			$('.btns', this).hide();
+		});
+		item_masonry();
+	});
+</script>
+</body>
+</html>
