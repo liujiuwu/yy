@@ -22,15 +22,32 @@ class IndexSnippet extends BaseSnippet {
   }
 
   def meinvs = {
-    renderItems(Item.findAll(By(Item.itemType, ItemType.MeiNv), OrderBy(Item.createdAt, Descending), StartAt(0), MaxRows(itemsPerPage)))
+    renderItems(Item.getItems(ItemType.MeiNv, itemsPerPage))
   }
-  
+
   def shuaiges = {
-    renderItems(Item.findAll(By(Item.itemType, ItemType.ShuaiGe), OrderBy(Item.createdAt, Descending), StartAt(0), MaxRows(itemsPerPage)))
+    renderItems(Item.getItems(ItemType.ShuaiGe, itemsPerPage))
+  }
+
+  def luolis = {
+    renderItems(Item.getItems(ItemType.KeAi, itemsPerPage))
   }
   
-  def luolis = {
-    renderItems(Item.findAll(By(Item.itemType, ItemType.LuoLi), OrderBy(Item.createdAt, Descending), StartAt(0), MaxRows(itemsPerPage)))
+  def t = {
+    <div class="item masonry_brick">
+	<div class="item_t">
+		<div class="img">
+			<span class="item-img"></span> <span class="price">￥<span id="price"></span></span>
+			<div class="btns"></div>
+		</div>
+		<div class="title">
+			<span id="title"></span>
+		</div>
+	</div>
+	<div class="item_b pull-right">
+		<i class="icon-heart"></i> 美丽指数:200 <span class="go"></span>
+	</div>
+</div>
   }
 
 }

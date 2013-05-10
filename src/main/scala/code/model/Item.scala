@@ -9,12 +9,16 @@ object ItemType extends Enumeration {
   type ItemType = Value
   val MeiNv = Value(0, "美女")
   val ShuaiGe = Value(1, "帅哥")
-  val LuoLi = Value(2, "萝莉")
+  val KeAi = Value(2, "可爱")
 }
 
 object Item extends Item with CRUDify[Long, Item] with LongKeyedMetaMapper[Item] {
   override def dbTableName = "items"
   override def fieldOrder = List(id, title, descn, picUrl, clickUrl, likeCount, commentCount, isSpread, createdAt, updatedAt)
+
+  def getItems(itemType: ItemType.Value, rows: Int) = {
+    Item.findAll(By(Item.itemType, itemType), OrderBy(Item.createdAt, Descending), StartAt(0), MaxRows(rows))
+  }
 
 }
 

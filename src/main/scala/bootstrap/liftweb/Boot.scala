@@ -52,7 +52,8 @@ object MenuInfo {
     Menu("首页") / "index" >> LocGroup("main"),
     Menu("美女") / "meinv" / ** >> LocGroup("main"),
     Menu("帅哥") / "shuaige" / ** >> LocGroup("main"),
-    Menu("萝莉") / "luoli" / ** >> LocGroup("main"))
+    Menu("可爱") / "keai" / ** >> LocGroup("main"),
+    Menu("查看") / "view" / ** >> LocGroup("main") >> Hidden)
 
   def sitemap() = SiteMap(menus: _*)
 }
