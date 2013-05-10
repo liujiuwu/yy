@@ -40,7 +40,7 @@ object Build extends Build {
       "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "provided->default",
       "ch.qos.logback" % "logback-classic" % "1.0.10" % "compile->default",
       "net.liftmodules" %% "fobo_2.5" % "0.9.6-SNAPSHOT",
-      "com.taobao" % "taobao-sdk" % "20130407" % "compile->default",
+      "com.tencent" % "open-sdk" % "3.0.5" % "compile->default",
       "org.apache.httpcomponents" % "httpclient" % "4.2.2",
       "mysql" % "mysql-connector-java" % "5.1.21" % "runtime->default",
       "org.specs2" % "specs2_2.10" % "1.14" % "test->default",

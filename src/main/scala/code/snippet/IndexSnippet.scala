@@ -15,9 +15,10 @@ class IndexSnippet extends BaseSnippet {
   private def renderItems(items: List[Item]) = {
     val picSuffix = "_200x200.jpg"
     ".item" #> items.map(item => {
-      "#title" #> item.title.is &
+      ".title" #> item.title.is &
+      ".heart-value" #> item.likeCount.is &
         ".item-img" #> <a href="javascript://" onclick={ "goto('" + item.clickUrl.is + "');return false;" }><img class="lazy" src="/images/grey.gif" data-original={ item.picUrl + picSuffix }/></a> &
-        ".go" #> <a href="javascript://" onclick={ "goto('" + item.clickUrl.is + "');return false;" } class="go"><i class="icon-chevron-right"></i>&nbsp;去看看</a>
+        ".go" #> <a href={"/view?id="+item.id} class="go"><i class="icon-chevron-right"></i>&nbsp;去看看</a>
     })
   }
 
