@@ -6,6 +6,10 @@ body {
 	padding-top: 40px;
 }
 
+form{
+	margin:0;padding:0
+}
+
 #logo {
 	padding: 10px 10px;
 }
@@ -781,10 +785,11 @@ overflow: hidden;
 }
 
 .well-white .page-header {
-	margin-top: 16px;
-	padding-bottom: 15px;
-	padding-left: 20px;
+	margin-top: 10px;
+	padding-bottom: 0;
+	padding-left: 10px;
 	position: relative;
+	margin-bottom:10px;
 }
 
 .well-white .page-header h1 {
@@ -806,3 +811,31 @@ overflow: hidden;
 	position: relative;
 	top: 4px;
 }
+
+.well-white .page-content {
+	padding: 0 10px 10px;
+}
+
+
+.b-item{
+	margin-top:20px;
+}
+.comments .list .nick {
+	color:#666;
+}
+
+.comments .list li {
+    border-bottom: 1px dashed rgb(221, 221, 221);
+    line-height: 18px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height:10px;
+}
+
+.comments .list li p {
+    margin-left: 40px;
+}
+
+
+.avatar{width:32px;height:32px;}
+.avatar img{width:32px;height:32px;}

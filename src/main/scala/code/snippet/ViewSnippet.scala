@@ -19,16 +19,18 @@ import net.liftweb.http.js.JsCmds
 class ViewSnippet extends BaseSnippet {
   def viewItem = {
     val id = S.param("id").map(_.toLong) openOr (0L)
-    val item = Item.find(By(Item.id, id))
 
-    item match {
-      case Full(it) =>
-        S.set("title", it.title.is)
-        S.appendJs(JsCmds.Run("document.title=\""+it.title.is+"\";"))
-      case _ =>
+    Item.find(By(Item.id, id)) match {
+      case Full(item) =>
+        val picSuffix = "_400x400.jpg"
+        S.set("title", item.title.is)
+        S.appendJs(JsCmds.Run("document.title=\"" + item.title.is + "\";"))
+        "#b-title" #> item.title.is & 
+        ".b-img" #> <a href="javascript://" onclick={ "goto('" + item.clickUrl.is + "');return false;" }><img class="lazy" src="/images/grey.gif" data-original={ item.picUrl + picSuffix }/></a>
+      case _ => <div></div>
     }
 
-    <div></div>
+    
   }
 
 }

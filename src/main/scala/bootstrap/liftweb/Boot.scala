@@ -15,12 +15,13 @@ import net.liftweb.sitemap.Loc._
 import net.liftweb.util._
 import net.liftweb.util.Helpers._
 import code.model.ItemType
+import code.model.User
 
 class Boot {
   def boot {
     LiftRules.addToPackages("code")
     DB.defineConnectionManager(DefaultConnectionIdentifier, MyDBVendor)
-    Schemifier.schemify(true, Schemifier.infoF _, Item)
+    Schemifier.schemify(true, Schemifier.infoF _, User, Item)
 
     FoBo.InitParam.JQuery = FoBo.JQuery182
     FoBo.InitParam.ToolKit = FoBo.Bootstrap230
@@ -32,7 +33,7 @@ class Boot {
     LiftRules.early.append(_.setCharacterEncoding("utf-8"))
     LiftRules.htmlProperties.default.set((r: Req) => new StarXHtmlInHtml5OutProperties(r.userAgent))
 
-    LiftRules.setSiteMapFunc(() => MenuInfo.sitemap)
+    LiftRules.setSiteMapFunc(() => User.sitemapMutator(MenuInfo.sitemap))
 
     /*LiftRules.statelessRewrite.prepend(NamedPF("YyRewrite") {
       case RewriteRequest(
@@ -41,6 +42,12 @@ class Boot {
           "index" :: Nil, Map("itemType" -> itemType)
           )
     })*/
+
+    //Rewrite
+    LiftRules.statelessRewrite.append {
+      case RewriteRequest(ParsePath("user" :: "sign_out" :: Nil, _, _, _), _, _) =>
+        RewriteResponse("user_mgt" :: "logout" :: Nil)
+    }
   }
 }
 
