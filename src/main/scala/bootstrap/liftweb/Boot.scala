@@ -54,6 +54,7 @@ class Boot {
 object MenuInfo {
   import Loc._
   import scala.xml._
+  case class LocIcon(cssIconClass: String*) extends AnyLocParam
 
   val menus = List(
     Menu("首页") / "index" >> LocGroup("main"),
