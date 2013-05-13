@@ -9,8 +9,8 @@ object Build extends Build {
   import Versions._
   import com.github.siasia._
   
-  lazy val yy = Project(
-    id = "yy",
+  lazy val aizaixin = Project(
+    id = "aizaixin",
     base = file("."),
     settings = buildSettings ++
       seq(WebPlugin.webSettings: _*) ++
